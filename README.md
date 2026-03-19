@@ -21,14 +21,11 @@
 
 CraftCoding is a desktop application that runs silently while you code. It watches your windows, browser tabs, and running processes every second. The moment it spots an AI tool — ChatGPT, Cursor, Copilot, or anything else — it fires an alert, docks your score, and in Strict Mode redirects you.
 
-When you close a project, you get a **signed PNG certificate** with your stats and one of three medal seals:
-
-<div align="center">
-
-| 🥇 Artisan Coder | 🥈 Hybrid Coder | ❌ Vibe Coder |
-|:---:|:---:|:---:|
-| 0 detections · score ≥ 90% | Used hints or score ≥ 50% | Score < 50% |
-| Pure human logic | Partially assisted | AI did the thinking |
+When you finish a project you get a **certificate PNG** with your stats and one of three seals:
+ 
+- 🥇 **Artisan Coder** — 0 detections, score ≥ 90%
+- 🥈 **Hybrid Coder** — used hints or had some detections
+- ❌ **Vibe Coder** — score below 50%
 
 </div>
 
@@ -46,81 +43,14 @@ AI is a powerful tool. The issue is **unconscious dependency**. CraftCoding make
 
 ## Features
 
-<details>
-<summary><b>🔒 Project Sealing</b></summary>
-<br>
-Name your project and seal it before starting. The timer only runs while sealed — your tracked time is honest. Unseal at any time to pause everything and save progress.
-</details>
-
-<details>
-<summary><b>⏱ Live Session Timer</b></summary>
-<br>
-A large monospace timer counts every second of active coding. Pause any time — progress saves automatically to a local SQLite database and resumes exactly where you left off, even across restarts.
-</details>
-
-<details>
-<summary><b>🕵️ 4-Layer AI Detection</b></summary>
-<br>
-
-CraftCoding runs four detection layers every second:
-
-| # | Layer | What it catches |
-|---|-------|-----------------|
-| 1 | **All open windows** | Every window title on your desktop — not just the active one. Catches renamed chat tabs like `"How to reverse a linked list — ChatGPT"` |
-| 2 | **Browser process args** | Command-line arguments of Chrome, Edge, and Brave looking for AI domains |
-| 3 | **Native AI processes** | `cursor.exe`, `windsurf`, `copilot`, `tabnine`, `codeium`, `ollama`, and more via `psutil` |
-| 4 | **Live session files** | The `Sessions/Tabs_*` files Edge and Chrome write in real time — detects open tabs even when the title has completely changed. Only reads files fresher than 5 minutes and only if the browser is actually running |
-
-**No false positives from closed tabs** — the history database is intentionally not used.
-</details>
-
-<details>
-<summary><b>🚨 Alert Toast + Strict Mode</b></summary>
-<br>
-
-When AI is detected a toast notification appears at the top of your screen with a 5-second countdown.
-
-- **Friendly mode** — warning only, −5 pts
-- **Strict mode** — closes the AI tab and redirects to Stack Overflow, −5 pts
-
-</details>
-
-<details>
-<summary><b>📊 Human Score</b></summary>
-<br>
-
-Starts at 100%. A live progress bar in the sidebar tracks it — green above 70, orange above 40, red below.
-
-- AI detection → **−5 pts**
-- Emergency hint → **−10 pts**
-
-</details>
-
-<details>
-<summary><b>🆘 Emergency Mode</b></summary>
-<br>
-
-Completely stuck? You can voluntarily request a hint. This immediately downgrades your seal to **Hybrid Coder**, deducts 10 points, and gets logged in the final certificate. No hiding it.
-</details>
-
-<details>
-<summary><b>🏆 Certificate Generation</b></summary>
-<br>
-
-A 1600×820 PNG certificate with:
-- Project name, total coding time, Human Score, detection count
-- Your medal image
-- Unique certificate ID
-- Color theme (gold / blue / red) matching your seal
-
-</details>
-
-<details>
-<summary><b>📂 Project Library</b></summary>
-<br>
-
-A full project manager window. Search, filter by status (In Progress / Certified), reopen projects, or delete them. Each card shows a color-coded status stripe and all stats at a glance.
-</details>
+- **Project sealing**: name your project, seal it, and the timer only runs while you're actively coding
+- **Live timer**: pauses and resumes, everything saves automatically to a local SQLite database
+- **4-layer AI detection**: window titles, browser process arguments, running executables (Cursor, Copilot, Tabnine…), and live Edge/Chrome session files
+- **Two modes**: Friendly (warnings only) or Strict (closes the AI tab and redirects to Stack Overflow)
+- **Human Score**: starts at 100%, −5 per detection, −10 for using the emergency hint
+- **Emergency mode**: if you're completely stuck you can request a hint, but it downgrades your seal
+- **Certificate export**: generates a styled PNG with your medal image, stats, and a unique ID
+- **Project library**: manage all your past projects, filter by status, reopen or delete them
 
 ---
 
